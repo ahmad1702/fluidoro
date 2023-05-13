@@ -1,0 +1,25 @@
+generator kysely {
+    provider = "prisma-kysely"
+    output   = "./types"
+}
+// SQLite Config
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+// MySQL Config
+// datasource db {
+//     provider     = "mysql"
+//     url          = env("DATABASE_URL")
+//     relationMode = "prisma"
+// }
+
+model Post {
+    id      String @id @default(cuid())
+    userId  String
+    title   String
+    content String
+
+    @@index([userId])
+}
